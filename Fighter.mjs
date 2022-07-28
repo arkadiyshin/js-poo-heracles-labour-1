@@ -21,9 +21,8 @@ class Fighter {
         let damage    = this.getRandomInt(this.strength);
         let dexterity = this.getRandomInt(enemy.dexterity);
 
-        damage = damage < dexterity ? damage  - dexterity : dexterity;
-        enemy.life-= damage > enemy.life ? enemy.life : damage;
-
+        damage = damage < dexterity ? dexterity : damage - dexterity;
+        enemy.life-= enemy.life < damage ? enemy.life : damage;
         console.log(`${this.name}  🗡️  ${enemy.name} ❤️  ${enemy.name}: ${enemy.life} `);
     }
 
@@ -34,6 +33,10 @@ class Fighter {
     showWinner(enemy){
         console.log(`💀 ${enemy.name} is dead`);
         console.log(`🏆 ${this.name} wins (${this.life})`);
+    }
+
+    recover(){
+
     }
 
 }
