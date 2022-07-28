@@ -1,5 +1,6 @@
 const MAX_LIFE = 100;
 const CHANCE_TO_RECOVER = 20;
+const CHANCE_TO_ADD_DAMAGE = 20;
 
 class Fighter {
     constructor(name, strength, dexterity, life = MAX_LIFE){
@@ -39,7 +40,14 @@ class Fighter {
     recover(){
         if(this.getRandomInt(100) <= CHANCE_TO_RECOVER) {
             this.life += 10;
-            console.log(`${this.name} drank potion 🧪 and recover ❤️  ${this.name}: ${this.life}`);
+            console.log(`${this.name} eat apple 🍏  and recover ❤️  ${this.name}: ${this.life}`);
+        }
+    }
+
+    combo(enemy){
+        if(this.getRandomInt(100) <= CHANCE_TO_ADD_DAMAGE) {
+            console.log(`${this.name} drank potion 🧪 and made combo hit`);
+            this.fight(enemy);
         }
     }
 

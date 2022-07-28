@@ -15,12 +15,14 @@ while (true) {
     console.log(`🕛 Round #${++round}`);
 
     heracles.fight(lion);
+    heracles.combo(lion);
     if (!lion.isAlive()) {
         heracles.showWinner(lion);
         break;
     }
 
     lion.fight(heracles);
+    lion.combo(heracles);
     if (!heracles.isAlive()) {
         lion.showWinner(heracles);
         break;
