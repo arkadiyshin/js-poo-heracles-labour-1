@@ -1,7 +1,6 @@
 const MAX_LIFE = 100;
 const CHANCE_TO_RECOVER = 20;
-const CHANCE_TO_ADD_DAMAGE = 20;
-
+const CHANCE_TO_COMBO = 20;
 
 class Fighter {
     constructor(name, strength, dexterity, life = MAX_LIFE){
@@ -9,6 +8,7 @@ class Fighter {
         this.strength = strength;
         this.dexterity = dexterity;
         this.life = life;
+        this.friends = [];
     }
 
     getRandomInt(max){
@@ -52,7 +52,7 @@ class Fighter {
     }
 
     combo(enemy){
-        if(enemy.life > 0 && this.getRandomInt(100) <= CHANCE_TO_ADD_DAMAGE) {
+        if(enemy.life > 0 && this.getRandomInt(100) <= CHANCE_TO_COMBO) {
             console.log(`${this.name} drank potion 🧪 and made combo hit`);
             this.fight(enemy);
         }
