@@ -1,6 +1,6 @@
 const MAX_LIFE = 100;
-const CHANCE_TO_RECOVER = 20;
-const CHANCE_TO_COMBO = 20;
+const CHANCE_TO_RECOVER = 10;
+const CHANCE_TO_COMBO = 10;
 
 class Fighter {
     constructor(name, strength, dexterity, life = MAX_LIFE){
@@ -8,11 +8,10 @@ class Fighter {
         this.strength = strength;
         this.dexterity = dexterity;
         this.life = life;
-        this.friends = [];
     }
 
     getRandomInt(max){
-        return Math.floor(Math.random() * max) + 1;
+        return Math.ceil(Math.random() * max);
     }
 
     show(){
@@ -30,9 +29,9 @@ class Fighter {
         let damage    = this.getRandomInt(this.strength);
         let dexterity = this.getRandomInt(enemy.dexterity);
 
-        damage = damage < dexterity ? dexterity : damage - dexterity;
-        enemy.life-= enemy.life < damage ? enemy.life : damage;
-        console.log(`${this.name}  🗡️  ${enemy.name} ❤️  ${enemy.name}: ${enemy.life} `);
+        damage = Math.min(damage, dexterity, enemy.life);
+        enemy.life-= damage;
+        console.log(`${this.name}  🗡️  ${damage}  ${enemy.name} ❤️  ${enemy.name}: ${enemy.life} `);
     }
 
     isAlive(){
@@ -45,14 +44,16 @@ class Fighter {
     }
 
     recover(){
-        if(this.getRandomInt(100) <= CHANCE_TO_RECOVER) {
-            this.life += 10;
-            console.log(`${this.name} eat apple 🍏  and recover ❤️  ${this.name}: ${this.life}`);
+        let random = this.getRandomInt(100);
+        if(random <= CHANCE_TO_RECOVER) {
+            this.life += random;
+            console.log(`${this.name} eat apple 🍏 ${random} and recover ❤️  ${this.name}: ${this.life}`);
         }
     }
 
     combo(enemy){
-        if(enemy.life > 0 && this.getRandomInt(100) <= CHANCE_TO_COMBO) {
+        let random = this.getRandomInt(100);
+        if(enemy.life > 0 && random<= CHANCE_TO_COMBO) {
             console.log(`${this.name} drank potion 🧪 and made combo hit`);
             this.fight(enemy);
         }
