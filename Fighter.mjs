@@ -1,4 +1,5 @@
-const MAX_LIFE = 100
+const MAX_LIFE = 100;
+const CHANCE_TO_RECOVER = 20;
 
 class Fighter {
     constructor(name, strength, dexterity, life = MAX_LIFE){
@@ -36,7 +37,10 @@ class Fighter {
     }
 
     recover(){
-
+        if(this.getRandomInt(100) <= CHANCE_TO_RECOVER) {
+            this.life += 10;
+            console.log(`${this.name} drank potion 🧪 and recover ❤️  ${this.name}: ${this.life}`);
+        }
     }
 
 }

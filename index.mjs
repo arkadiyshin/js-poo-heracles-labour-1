@@ -26,6 +26,9 @@ while (true) {
         break;
     }
 
+    heracles.recover();
+    lion.recover();
+
 }
 
 
